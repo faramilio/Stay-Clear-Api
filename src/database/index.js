@@ -4,6 +4,8 @@ const Sequelize = require('sequelize')
 const databaseConfig = require('../config/database')
 
 const User = require('../app/models/User')
+const categories = require('../app/models/category')
+
 
 class Database {
     constructor(){
@@ -12,6 +14,9 @@ class Database {
     init(){
         this.connection = new Sequelize(databaseConfig)
         User.init(this.connection)
+        categories.init(this.connection)
     }
+
 }
 module.exports = new Database()
+
