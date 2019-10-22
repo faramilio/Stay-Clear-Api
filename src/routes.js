@@ -1,9 +1,30 @@
 const express = require('express')
 const routes = express.Router()
-//nossos controles
-const Usercontroller = require('./app/controllers/UserController')
 
-routes.post('/users', Usercontroller.store)
+//Nossos controllers
+const UserController = require('./app/controllers/UserController')
+const AuthController = require('./app/controllers/AuthController')
+
+//Nossos middlewares
+const AuthMiddleware = require('./app/middlewares/AuthMiddleware')
+
+/**
+ * MÉTODOS HTTP
+ * GET = Trazer algo
+ * POST = Cadastrar algo
+ * PUT = Atualizar algo
+ * DELETE = Apagar algo
+ */
+
+//************* */ NOSSAS ROTAS*******************************
+routes.post('/users', UserController.store) //Rota de cadastro de usuários
+routes.post('/auth', AuthController.store) //Rota de autenticação
+
+routes.use(AuthMiddleware)
+
+
+routes.get('/users', UserController.index) //Rota de retorno de usuários
+
 
 // routes.post('/categories', async (req, res)=>{
 //     const categories = await Categories.create(req.body)
