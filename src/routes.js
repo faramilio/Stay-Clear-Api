@@ -4,6 +4,7 @@ const routes = express.Router()
 //Nossos controllers
 const UserController = require('./app/controllers/UserController')
 const AuthController = require('./app/controllers/AuthController')
+const FriendController = require('./app/controllers/FriendController')
 
 //Nossos middlewares
 const AuthMiddleware = require('./app/middlewares/AuthMiddleware')
@@ -20,10 +21,13 @@ const AuthMiddleware = require('./app/middlewares/AuthMiddleware')
 routes.post('/users', UserController.store) //Rota de cadastro de usuários
 routes.post('/auth', AuthController.store) //Rota de autenticação
 
+//rotas abaixo da linha 24, precisam de atenticação
 routes.use(AuthMiddleware)
 
 
 routes.get('/users', UserController.index) //Rota de retorno de usuários
+routes.get('/friends', FriendController.index) //rota de retorno de amigos
+routes.post('/friends', FriendController.store) //rota de adicionar amigos
 
 
 // routes.post('/categories', async (req, res)=>{

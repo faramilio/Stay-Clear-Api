@@ -1,16 +1,16 @@
 const Sequelize = require('sequelize')
 const {Model} = require('sequelize')
-
-class categories extends Model {
+class Friend extends Model {
     static init(sequelize){
         super.init({
-            profession: Sequelize.STRING,
-            description: Sequelize.STRING,
+            id_usuario: Sequelize.INTEGER,
+            id_friend: Sequelize.INTEGER
         },
         {
             sequelize
         }
         )
+        
     }
 }
-module.exports = categories
+module.exports = Friend
